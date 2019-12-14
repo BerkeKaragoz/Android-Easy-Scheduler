@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EasyReminder</string>
+    <string name="all_tasks">All Tasks</string>
+    <string name="today_s_tasks">Today\'s Tasks</string>
+</resources>
