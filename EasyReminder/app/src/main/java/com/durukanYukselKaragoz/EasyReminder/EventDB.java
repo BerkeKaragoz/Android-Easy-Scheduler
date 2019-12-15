@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EventDB {
 
-    public static final String TABLE_NAME ="contact";
+    public static final String TABLE_NAME ="events";
     public static final String FIELD_ID = "_id";
     public static final String FIELD_NAME = "name";
     public static final String FIELD_DETAIL = "detail";
