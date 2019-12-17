@@ -18,7 +18,7 @@ public class EventDB {
     public static final String FIELD_HOUR = "hour";
     public static final String FIELD_MINUTE = "minute";
 
-    public static final String CREATE_TABLE_SQL = "CREATE TABLE "+TABLE_NAME+" ("+FIELD_ID+" number, "+FIELD_NAME+" text, "+FIELD_DETAIL+" text, "+FIELD_YEAR+" number, " + FIELD_MONTH + " number,"
+    public static final String CREATE_TABLE_SQL = "CREATE TABLE "+TABLE_NAME+" ("+FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+FIELD_NAME+" text, "+FIELD_DETAIL+" text, "+FIELD_YEAR+" number, " + FIELD_MONTH + " number,"
             + FIELD_DAY +" number, " + FIELD_HOUR + " number, " + FIELD_MINUTE + " number);";
     public static final String DROP_TABLE_SQL = "DROP TABLE if exists "+TABLE_NAME;
 
@@ -66,9 +66,8 @@ public class EventDB {
         }
         return data;
     }
-    public static long insertEvent(DatabaseHelper db, int id, String name, String detail, int year, int month, int day, int hour, int minute){
+    public static long insertEvent(DatabaseHelper db, String name, String detail, int year, int month, int day, int hour, int minute){
         ContentValues contentValues = new ContentValues( );
-        contentValues.put(FIELD_ID, id);
         contentValues.put(FIELD_NAME, name);
         contentValues.put(FIELD_DETAIL, detail);
         contentValues.put(FIELD_YEAR, year);

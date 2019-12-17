@@ -91,4 +91,20 @@
         android:hint="Select Date"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/textAThourmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:hint="Select Time"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnFinish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="finish"
+        android:text="Button" />
+
 </LinearLayout>
