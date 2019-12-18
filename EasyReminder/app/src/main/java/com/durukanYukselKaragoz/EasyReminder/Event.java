@@ -2,13 +2,14 @@ package com.durukanYukselKaragoz.EasyReminder;
 
 public class Event {
     private int id;
-    private String eventName, eventDetail;
+    private String eventName, eventDetail, eventType;
     private int year, month, day, hour, minute;
 
-    public Event(int id, String eventName, String eventDetail, int year, int month, int day, int hour, int minute) {
+    public Event(int id, String eventName, String eventDetail, String eventType, int year, int month, int day, int hour, int minute) {
         this.id = id;
         this.eventName = eventName;
         this.eventDetail = eventDetail;
+        this.eventType = eventType;
         this.year = year;
         this.month = month;
         this.day = day;
@@ -39,6 +40,10 @@ public class Event {
     public void setEventDetail(String eventDetail) {
         this.eventDetail = eventDetail;
     }
+
+    public String getEventType() { return eventType; }
+
+    public void setEventType(String eventType) { this.eventType = eventType; }
 
     public int getYear() {
         return year;

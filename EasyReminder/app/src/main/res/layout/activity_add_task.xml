@@ -43,8 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="14"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
 
         </TableRow>
 
@@ -58,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="Details" />
+                android:text="@string/details" />
 
             <EditText
                 android:id="@+id/editTextATDetails"
@@ -88,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:hint="Select Date"
+        android:hint="@string/select_date"
         android:textSize="18sp" />
 
     <TextView
@@ -97,14 +96,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:hint="Select Time"
+        android:hint="@string/select_time"
         android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spinnerEventType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnFinish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="finish"
-        android:text="Button" />
+        android:text="@string/add_task" />
 
 </LinearLayout>
