@@ -7,10 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 
 public class MainActivity extends AppCompatActivity {
+    //Variables
     DatabaseHelper dbHelper;
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,4 +31,5 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, addTask.class);
         startActivity(intent);
     }
+
 }
