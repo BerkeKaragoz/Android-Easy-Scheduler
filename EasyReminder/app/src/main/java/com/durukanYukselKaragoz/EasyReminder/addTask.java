@@ -179,11 +179,10 @@ public class addTask extends AppCompatActivity {
         if(checkEmptyFields()) {
             thisName = textATName.getText().toString();
             thisDetail = textATDetail.getText().toString();
-            EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
+            long id = EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent notificationIntent = new Intent(this, AlarmReceiver.class);
-            int requestCode = (int) System.currentTimeMillis(); //RequestCode
-            PendingIntent broadcast = PendingIntent.getBroadcast(this, requestCode, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent broadcast = PendingIntent.getBroadcast(this, (int) id, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Calendar calendarToSchedule = Calendar.getInstance();
             calendarToSchedule.setTimeInMillis(System.currentTimeMillis());
             calendarToSchedule.clear();
@@ -212,4 +211,6 @@ public class addTask extends AppCompatActivity {
         }
         return true;
     }
+
+
 }

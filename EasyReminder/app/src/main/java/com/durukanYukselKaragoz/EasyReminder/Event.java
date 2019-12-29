@@ -1,10 +1,11 @@
 package com.durukanYukselKaragoz.EasyReminder;
 
+import java.util.ArrayList;
+
 public class Event {
     private int id;
     private String eventName, eventDetail, eventType;
     private int year, month, day, hour, minute;
-
     public Event(int id, String eventName, String eventDetail, String eventType, int year, int month, int day, int hour, int minute) {
         this.id = id;
         this.eventName = eventName;
