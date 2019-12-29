@@ -23,7 +23,10 @@ import org.threeten.bp.LocalDateTime;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -76,14 +79,16 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<Event> sortEvents(ArrayList<Event> list){
         ArrayList<Event> holder = new ArrayList<>();
+        ArrayList<LocalDateTime> dates = new ArrayList<>();
         for(int i = 0; i<list.size(); i++){
             Event event = list.get(i);
             LocalDateTime aDatetime = LocalDateTime.of(event.getYear(), event.getMonth()+1, event.getDay(), event.getHour(), event.getMinute(), 0);
             if(aDatetime.isAfter(LocalDateTime.now())){
                 holder.add(event);
+                dates.add(aDatetime);
             }
         }
-        return holder;
+        return bubbleSort(dates, holder);
     }
 
     @Override
@@ -93,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public ArrayList<Event> getTodaysTasks(ArrayList<Event> list){
         ArrayList<Event> holder = new ArrayList<>();
+        ArrayList<LocalDateTime> dates = new ArrayList<>();
         LocalDateTime today = LocalDateTime.now();
         int year = today.getYear();
         int month = today.getMonthValue();
@@ -103,8 +109,22 @@ public class MainActivity extends AppCompatActivity {
             LocalDateTime aDatetime = LocalDateTime.of(event.getYear(), event.getMonth()+1, event.getDay(), event.getHour(), event.getMinute(), 0);
             if(aDatetime.getYear() == year && aDatetime.getMonthValue() == month && aDatetime.getDayOfMonth() == day){
                 holder.add(event);
+                dates.add(aDatetime);
             }
         }
-        return holder;
+        return bubbleSort(dates, holder);
+    }
+    public ArrayList<Event> bubbleSort(ArrayList<LocalDateTime> dates, ArrayList<Event> eventSorted)
+    {
+        int i, j;
+        for (i = 0; i < dates.size(); i++)
+
+            // Last i elements are already in place
+            for (j = 0; j < dates.size()-i-1; j++)
+                if (dates.get(j).isAfter(dates.get(j+1))){
+                    Collections.swap(dates, j, j+1);
+                    Collections.swap(eventSorted, j, j+1);
+                }
+        return eventSorted;
     }
 }
