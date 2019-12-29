@@ -6,24 +6,31 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.time.LocalDateTime;
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
+import org.threeten.bp.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 
 public class SecondActivity extends AppCompatActivity {
     ArrayList<Event> events;
     DatabaseHelper dbHelper;
     ArrayList<LocalDateTime> times;
+    ArrayList<Date> dates;
     TextView tvName, tvDetail, tvDate;
+    Date date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        AndroidThreeTen.init(this);
         dbHelper = new DatabaseHelper(this);
         events = (ArrayList) EventDB.getAllEvent(dbHelper);
         times = new ArrayList<>();
+        dates = new ArrayList<>();
         tvDate = findViewById(R.id.tvDate);
         for(int i = 0; i<events.size(); i++){
             Event event = events.get(i);
@@ -46,4 +53,5 @@ public class SecondActivity extends AppCompatActivity {
         }
         return list.get(list.size()-1);
     }
-}
+
+    }

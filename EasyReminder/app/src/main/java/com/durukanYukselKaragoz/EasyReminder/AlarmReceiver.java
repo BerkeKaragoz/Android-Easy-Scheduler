@@ -8,6 +8,10 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.AudioAttributes;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -27,11 +31,15 @@ public class AlarmReceiver extends BroadcastReceiver{
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder builder = new Notification.Builder(context);
-
-        Notification notification = builder.setContentTitle("Demo App Notification")
-                .setContentText("New Notification From Demo App..")
-                .setTicker("New Message Alert!")
-                .setSmallIcon(R.mipmap.ic_launcher)
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.results);
+        Notification notification = builder.setContentTitle("Task Reminder")
+                .setContentText("One of your tasks is ready to go!")
+                .setTicker("New Event Alert!")
+                .setSmallIcon(R.drawable.ic_stat_access_alarms)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                        R.mipmap.ic_launcher))
+                .setSound(sound)
                 .setContentIntent(pendingIntent).build();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -46,6 +54,14 @@ public class AlarmReceiver extends BroadcastReceiver{
                     "NotificationDemo",
                     IMPORTANCE_DEFAULT
             );
+
+            AudioAttributes attributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build();
+            channel.enableLights(true);
+            channel.enableVibration(true);
+            channel.setSound(sound, attributes);
             notificationManager.createNotificationChannel(channel);
         }
 

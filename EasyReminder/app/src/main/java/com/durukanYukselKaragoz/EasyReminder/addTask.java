@@ -57,6 +57,7 @@ public class addTask extends AppCompatActivity {
         textATDetail = findViewById(R.id.editTextATDetails);
         textATType = findViewById(R.id.spinnerEventType);
         textATName = findViewById(R.id.editTextATName);
+
         textATDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,17 +176,40 @@ public class addTask extends AppCompatActivity {
     }
 
     public void finish(View view) {
-        thisName = textATName.getText().toString();
-        thisDetail = textATDetail.getText().toString();
-        EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent notificationIntent = new Intent(this, AlarmReceiver.class);
-        int requestCode = (int) System.currentTimeMillis(); //RequestCode
-        PendingIntent broadcast = PendingIntent.getBroadcast(this, requestCode, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Calendar calendarToSchedule = Calendar.getInstance();
-        calendarToSchedule.setTimeInMillis(System.currentTimeMillis());
-        calendarToSchedule.clear();
-        calendarToSchedule.set(thisYear, thisMonth, thisDay, thisHour, thisMin, 00);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendarToSchedule.getTimeInMillis(), broadcast);
+        if(checkEmptyFields()) {
+            thisName = textATName.getText().toString();
+            thisDetail = textATDetail.getText().toString();
+            EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent notificationIntent = new Intent(this, AlarmReceiver.class);
+            int requestCode = (int) System.currentTimeMillis(); //RequestCode
+            PendingIntent broadcast = PendingIntent.getBroadcast(this, requestCode, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Calendar calendarToSchedule = Calendar.getInstance();
+            calendarToSchedule.setTimeInMillis(System.currentTimeMillis());
+            calendarToSchedule.clear();
+            calendarToSchedule.set(thisYear, thisMonth, thisDay, thisHour, thisMin, 00);
+            if(isTimeValid(calendarToSchedule)) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendarToSchedule.getTimeInMillis(), broadcast);
+                Toast.makeText(this, "Task successfully added!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Date entered is invalid", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this, "Every field must be filled!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public boolean checkEmptyFields(){
+        if(textATName.getText().toString().isEmpty() && textATDetail.getText().toString().isEmpty() && textATDate.toString().isEmpty() && textATHourmin.toString().isEmpty()){
+            return false;
+        }
+        return true;
+    }
+    public boolean isTimeValid(Calendar calendar){
+        Calendar now = Calendar.getInstance();
+        if(calendar.before(now) || calendar.equals(now)){
+            return false;
+        }
+        return true;
     }
 }
