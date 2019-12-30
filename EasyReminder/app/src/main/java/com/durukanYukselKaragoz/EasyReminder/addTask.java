@@ -6,8 +6,10 @@ import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -31,21 +33,14 @@ import java.util.Calendar;
 import java.util.List;
 
 public class addTask extends AppCompatActivity {
-
+    ArrayList<String> arrayListEventTypes;
+    private IntentFilter mIntentFilter;
     private TextView textATDate, textATHourmin, textATDetail, textATName;
     private Spinner textATType;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     DatabaseHelper dbHelper;
     String thisName, thisDetail, thisType;
     int thisYear, thisMonth, thisDay, thisHour, thisMin;
-
-    //JsonRelated variables
-    String jsonStr;
-    JSONObject eventJSONObject;
-    JSONArray eventTypes;
-
-    //Tag variables
-    public static final String TAG_EVENTTYPES = "eventTypes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,55 +119,26 @@ public class addTask extends AppCompatActivity {
 
             }
         });
-        readEventTypesFromAssets();
+        startService(new Intent(getBaseContext(), JsonParsingIntentService.class));
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction("LIST_SENDING_ACTION");
+
+        // Register the receiver
+        registerReceiver(mIntentReceiver, mIntentFilter);
     }
+    private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent){
+            //Receiving the list
+            Bundle bundle = intent.getExtras();
+            ArrayList<String> eventTypeArrayList;
+            eventTypeArrayList = bundle.getStringArrayList("listeventtype");
+            //put Strings in the spinner
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, eventTypeArrayList);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            textATType.setAdapter(adapter);
+        }};
 
-    //Reads Json Objects from a previously created Json File
-    public void readEventTypesFromAssets(){
-        jsonStr = loadFileFromAssets("eventTypes.json");
-        if (jsonStr != null) {
-            try {
-                eventJSONObject = new JSONObject(jsonStr);
-                eventTypes = eventJSONObject.getJSONArray(TAG_EVENTTYPES);
-                List<String> listist = new ArrayList<String>();
-
-                // looping through all eventTypes
-                for (int i = 0; i < eventTypes.length(); i++) {
-                    listist.add("" + eventTypes.get(i));
-                }
-
-                //put Strings in the spinner
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listist);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                textATType.setAdapter(adapter);
-
-            } catch (JSONException ee) {
-                ee.printStackTrace();
-            }
-        }
-    }
-    //Retrieves the file from the assets folder
-    private String loadFileFromAssets(String fileName) {
-        String file = null;
-        try {
-
-            InputStream is = getBaseContext().getAssets().open(fileName);
-
-            int size = is.available();
-            byte[] buffer = new byte[size];
-
-            is.read(buffer);
-            is.close();
-
-            file = new String(buffer, "UTF-8");
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
-        return file;
-    }
 
     public void finish(View view) {
         thisName = textATName.getText().toString();
