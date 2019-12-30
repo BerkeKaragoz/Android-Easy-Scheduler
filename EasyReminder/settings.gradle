@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':materialdesigncolors-1.0.0'
 rootProject.name='EasyReminder'

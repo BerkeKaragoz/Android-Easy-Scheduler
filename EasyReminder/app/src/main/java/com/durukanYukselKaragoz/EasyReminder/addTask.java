@@ -43,6 +43,7 @@ public class addTask extends AppCompatActivity {
     String jsonStr;
     JSONObject eventJSONObject;
     JSONArray eventTypes;
+    ImageFragment imageFragment;
 
     //Tag variables
     public static final String TAG_EVENTTYPES = "eventTypes";
@@ -57,6 +58,7 @@ public class addTask extends AppCompatActivity {
         textATDetail = findViewById(R.id.editTextATDetails);
         textATType = findViewById(R.id.spinnerEventType);
         textATName = findViewById(R.id.editTextATName);
+
 
         textATDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +128,20 @@ public class addTask extends AppCompatActivity {
             }
         });
         readEventTypesFromAssets();
+        if(imageFragment == null){
+            imageFragment = (ImageFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
+        }
+        textATType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                imageFragment.changeImage(textATType.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     //Reads Json Objects from a previously created Json File
@@ -199,7 +215,7 @@ public class addTask extends AppCompatActivity {
     }
 
     public boolean checkEmptyFields(){
-        if(textATName.getText().toString().isEmpty() && textATDetail.getText().toString().isEmpty() && textATDate.toString().isEmpty() && textATHourmin.toString().isEmpty()){
+        if(textATName.getText().toString().isEmpty() || textATDetail.getText().toString().isEmpty() || textATDate.toString().isEmpty() || textATHourmin.toString().isEmpty()){
             return false;
         }
         return true;

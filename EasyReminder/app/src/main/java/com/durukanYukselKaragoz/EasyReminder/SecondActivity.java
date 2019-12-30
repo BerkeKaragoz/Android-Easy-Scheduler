@@ -21,6 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     ArrayList<LocalDateTime> times;
     TextView tvName, tvDetail, tvDate, tvTaskType;
     Event foundEvent;
+    ImageFragment imageFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,11 @@ public class SecondActivity extends AppCompatActivity {
             String date = foundEvent.getYear() + "/" + foundEvent.getMonth() + "/" + foundEvent.getDay() + "    " + String.format("%02d", foundEvent.getHour()) + ":" + String.format("%02d", foundEvent.getMinute());
             tvDate.setText(date);
         }
+        if(imageFragment == null){
+            imageFragment = (ImageFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+        }
 
+        imageFragment.changeImage(foundEvent.getEventType());
     }
     public LocalDateTime findDate(ArrayList<LocalDateTime> list){
         for(int i = 0; i<list.size(); i++){
