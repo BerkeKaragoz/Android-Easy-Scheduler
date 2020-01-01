@@ -7,39 +7,35 @@
     android:layout_height="90dp">
 
     <TextView
-        android:id="@+id/taskName"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:id="@+id/recycName"
+        android:layout_width="169dp"
+        android:layout_height="52dp"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="25dp"
         android:text=""
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/taskTime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/taskTime"
+        android:id="@+id/recycDate"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="25dp"
-        android:text=""
-        android:textStyle="italic"
+        android:layout_height="49dp"
+        android:layout_marginStart="185dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/checkBoxDone"
-        app:layout_constraintStart_toEndOf="@+id/taskName"
+        app:layout_constraintEnd_toStartOf="@+id/recycDelete"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBoxDone"
+    <Button
+        android:id="@+id/recycDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:text=""
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/taskTime"
+        app:layout_constraintStart_toEndOf="@+id/recycDate"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/deep_orange_a_100"
     android:orientation="vertical"
     tools:context=".SecondActivity">
 
@@ -39,5 +40,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:text="Detail" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.durukanYukselKaragoz.EasyReminder.ImageFragment"
+        android:layout_width="421dp"
+        android:layout_height="176dp" />
 
 </LinearLayout>

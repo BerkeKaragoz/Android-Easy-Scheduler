@@ -111,4 +111,10 @@
         android:onClick="finish"
         android:text="@string/add_task" />
 
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.durukanYukselKaragoz.EasyReminder.ImageFragment"
+        android:layout_width="431dp"
+        android:layout_height="337dp" />
+
 </LinearLayout>

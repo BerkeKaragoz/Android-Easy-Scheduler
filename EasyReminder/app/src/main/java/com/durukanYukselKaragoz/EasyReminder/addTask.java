@@ -43,6 +43,7 @@ public class addTask extends AppCompatActivity {
     String jsonStr;
     JSONObject eventJSONObject;
     JSONArray eventTypes;
+    ImageFragment imageFragment;
 
     //Tag variables
     public static final String TAG_EVENTTYPES = "eventTypes";
@@ -57,6 +58,7 @@ public class addTask extends AppCompatActivity {
         textATDetail = findViewById(R.id.editTextATDetails);
         textATType = findViewById(R.id.spinnerEventType);
         textATName = findViewById(R.id.editTextATName);
+
 
         textATDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +128,20 @@ public class addTask extends AppCompatActivity {
             }
         });
         readEventTypesFromAssets();
+        if(imageFragment == null){
+            imageFragment = (ImageFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
+        }
+        textATType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                imageFragment.changeImage(textATType.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     //Reads Json Objects from a previously created Json File
@@ -179,11 +195,10 @@ public class addTask extends AppCompatActivity {
         if(checkEmptyFields()) {
             thisName = textATName.getText().toString();
             thisDetail = textATDetail.getText().toString();
-            EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
+            long id = EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent notificationIntent = new Intent(this, AlarmReceiver.class);
-            int requestCode = (int) System.currentTimeMillis(); //RequestCode
-            PendingIntent broadcast = PendingIntent.getBroadcast(this, requestCode, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent broadcast = PendingIntent.getBroadcast(this, (int) id, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Calendar calendarToSchedule = Calendar.getInstance();
             calendarToSchedule.setTimeInMillis(System.currentTimeMillis());
             calendarToSchedule.clear();
@@ -200,7 +215,7 @@ public class addTask extends AppCompatActivity {
     }
 
     public boolean checkEmptyFields(){
-        if(textATName.getText().toString().isEmpty() && textATDetail.getText().toString().isEmpty() && textATDate.toString().isEmpty() && textATHourmin.toString().isEmpty()){
+        if(textATName.getText().toString().isEmpty() || textATDetail.getText().toString().isEmpty() || textATDate.toString().isEmpty() || textATHourmin.toString().isEmpty()){
             return false;
         }
         return true;
@@ -212,4 +227,6 @@ public class addTask extends AppCompatActivity {
         }
         return true;
     }
+
+
 }

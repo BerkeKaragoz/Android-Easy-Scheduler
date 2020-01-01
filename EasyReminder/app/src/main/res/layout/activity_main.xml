@@ -17,12 +17,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerToday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="86dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="17dp"
-        android:visibility="invisible">
+        android:visibility="visible">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -36,12 +36,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="88dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="17dp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/button"
