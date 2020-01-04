@@ -50,4 +50,10 @@
         android:onClick="onClick"
         android:text="@string/add_task" />
 
+    <ImageView
+        android:id="@+id/doubleClickImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/doubleclick" />
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.durukanYukselKaragoz.EasyReminder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,7 +11,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -33,10 +37,14 @@ public class MainActivity extends AppCompatActivity {
     //Variables
     DatabaseHelper dbHelper;
     Intent intent;
+    private ImageView volleyImage;
     RecyclerView recyclerAll, recyclerToday;
     MyRecyclerViewAdapter adapter;
     MyRecyclerViewAdapter2 adapter2;
     ArrayList<Event> events, allEvents, todaysEvents;
+    //Gesture Related
+    private GestureDetectorCompat mDetector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,19 @@ public class MainActivity extends AppCompatActivity {
         adapter2 = new MyRecyclerViewAdapter2(this, todaysEvents);
         recyclerToday.setAdapter(adapter2);
 
+        MyGestureListener mgl = new MyGestureListener();
+        mDetector = new GestureDetectorCompat(this, mgl);
+        mDetector.setOnDoubleTapListener(mgl); // add OnDoubleTapListener to gesture detector object to catch doubletab gesture!!!!!
+
+        volleyImage = (ImageView) findViewById(R.id.doubleClickImage);
+
+        volleyImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                //return MainActivity.this.mDetector.onTouchEvent(motionEvent);
+                return mDetector.onTouchEvent(motionEvent);
+            }
+        });
     }
 
     public void onClick(View view) {
@@ -114,8 +135,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return bubbleSort(dates, holder);
     }
-    public ArrayList<Event> bubbleSort(ArrayList<LocalDateTime> dates, ArrayList<Event> eventSorted)
-    {
+    public ArrayList<Event> bubbleSort(ArrayList<LocalDateTime> dates, ArrayList<Event> eventSorted) {
         int i, j;
         for (i = 0; i < dates.size(); i++)
 
@@ -126,5 +146,28 @@ public class MainActivity extends AppCompatActivity {
                     Collections.swap(eventSorted, j, j+1);
                 }
         return eventSorted;
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onDown(MotionEvent event) {
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent event) {
+            Toast.makeText(getBaseContext(), "onDoubleTapEvent Over Image", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            super.onLongPress(e);
+        }
     }
 }
