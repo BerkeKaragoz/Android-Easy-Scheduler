@@ -41,14 +41,7 @@ public class addTask extends AppCompatActivity {
     String thisName, thisDetail, thisType;
     int thisYear, thisMonth, thisDay, thisHour, thisMin;
 
-    //JsonRelated variables
-    String jsonStr;
-    JSONObject eventJSONObject;
-    JSONArray eventTypes;
     ImageFragment imageFragment;
-
-    //Tag variables
-    public static final String TAG_EVENTTYPES = "eventTypes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
