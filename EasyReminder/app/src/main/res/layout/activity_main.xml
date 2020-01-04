@@ -11,10 +11,15 @@
         android:id="@+id/tvToday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/today_s_tasks" />
+        android:text="@string/today_s_tasks"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerToday"
@@ -31,9 +36,14 @@
         android:id="@+id/tvAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/all_tasks" />
+        android:text="@string/all_tasks"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAll"

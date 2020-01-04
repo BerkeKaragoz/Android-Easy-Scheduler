@@ -8,4 +8,29 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EasyReminderTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/erColorPrimary</item>
+        <item name="colorPrimaryDark">@color/erColorPrimaryDark</item>
+        <item name="colorAccent">@color/erColorAccent</item>
+
+        <item name="android:textColor">@color/erColorForeground</item>
+        <item name="android:windowBackground">@color/erColorBackground</item>
+        <item name="android:textColorHint">@color/erColorForegroundHint</item>
+        <item name="android:popupBackground">@color/erColorPrimary</item>
+
+        <item name="android:buttonStyle">@style/erButton</item>
+        <item name="android:dropDownSpinnerStyle">@style/erSpinner</item>
+
+    </style>
+
+    <style name="erButton" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/erColorPrimary</item>
+        <item name="android:textColor">@color/erColorForeground</item>
+    </style>
+
+    <style name="erSpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:popupBackground">@color/erColorPrimary</item>
+        <item name="android:textColor">@color/erColorForeground</item>
+    </style>
+
 </resources>
