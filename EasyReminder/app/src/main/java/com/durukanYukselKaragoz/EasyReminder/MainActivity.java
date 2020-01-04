@@ -9,6 +9,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Event> events, allEvents, todaysEvents;
     //Gesture Related
     private GestureDetectorCompat mDetector;
+    //Volley Related
+    OurVolley ourVolley;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         mDetector = new GestureDetectorCompat(this, mgl);
         mDetector.setOnDoubleTapListener(mgl); // add OnDoubleTapListener to gesture detector object to catch doubletab gesture!!!!!
 
-        volleyImage = (ImageView) findViewById(R.id.doubleClickImage);
+        ourVolley = new OurVolley(this);
+        volleyImage = findViewById(R.id.doubleClickImage);
 
         volleyImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -148,6 +152,13 @@ public class MainActivity extends AppCompatActivity {
         return eventSorted;
     }
 
+    public void setBitmapImage(Bitmap response) {
+        volleyImage.setImageBitmap(response);
+        Toast.makeText(MainActivity.this, "IMAGE LOADED",
+                Toast.LENGTH_SHORT).show();
+
+    }
+
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onDown(MotionEvent event) {
@@ -161,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent event) {
-            Toast.makeText(getBaseContext(), "onDoubleTapEvent Over Image", Toast.LENGTH_SHORT).show();
+            ourVolley.requestForBinaryData("https://worshiphousemedia.s3.amazonaws.com/images/main/s/mo/ora/mo/classynewyearwelcomemotion.jpg");
             return true;
         }
 
