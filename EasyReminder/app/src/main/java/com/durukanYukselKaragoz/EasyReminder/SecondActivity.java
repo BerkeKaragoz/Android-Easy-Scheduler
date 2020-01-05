@@ -54,8 +54,7 @@ public class SecondActivity extends AppCompatActivity {
         if(imageFragment == null){
             imageFragment = (ImageFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         }
-
-        imageFragment.changeImage(foundEvent.getEventType());
+             imageFragment.changeImage(foundEvent.getEventType());
     }
     public LocalDateTime findDate(ArrayList<LocalDateTime> list){
         for(int i = 0; i<list.size(); i++){

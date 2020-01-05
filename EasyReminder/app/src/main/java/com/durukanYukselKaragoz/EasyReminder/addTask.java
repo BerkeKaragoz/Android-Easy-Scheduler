@@ -74,18 +74,6 @@ public class addTask extends AppCompatActivity {
             }
         });
 
-        //Spinner on item selected
-        textATType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                thisType = textATType.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -129,6 +117,7 @@ public class addTask extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 imageFragment.changeImage(textATType.getSelectedItem().toString());
+                thisType = textATType.getSelectedItem().toString();
             }
 
             @Override
@@ -159,17 +148,17 @@ public class addTask extends AppCompatActivity {
 
     public void finish(View view) {
         if(checkEmptyFields()) {
-            thisName = textATName.getText().toString();
-            thisDetail = textATDetail.getText().toString();
-            long id = EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            Intent notificationIntent = new Intent(this, AlarmReceiver.class);
-            PendingIntent broadcast = PendingIntent.getBroadcast(this, (int) id, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Calendar calendarToSchedule = Calendar.getInstance();
             calendarToSchedule.setTimeInMillis(System.currentTimeMillis());
             calendarToSchedule.clear();
             calendarToSchedule.set(thisYear, thisMonth, thisDay, thisHour, thisMin, 00);
             if(isTimeValid(calendarToSchedule)) {
+                thisName = textATName.getText().toString();
+                thisDetail = textATDetail.getText().toString();
+                long id = EventDB.insertEvent(dbHelper, thisName, thisDetail, thisType, thisYear, thisMonth, thisDay, thisHour, thisMin);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                Intent notificationIntent = new Intent(this, AlarmReceiver.class);
+                PendingIntent broadcast = PendingIntent.getBroadcast(this, (int) id, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendarToSchedule.getTimeInMillis(), broadcast);
                 Toast.makeText(this, "Task successfully added!", Toast.LENGTH_LONG).show();
             } else {
