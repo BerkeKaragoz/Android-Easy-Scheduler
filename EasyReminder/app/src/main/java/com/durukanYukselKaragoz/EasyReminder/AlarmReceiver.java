@@ -8,6 +8,7 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioAttributes;
 import android.media.RingtoneManager;
@@ -36,9 +37,8 @@ public class AlarmReceiver extends BroadcastReceiver{
         Notification notification = builder.setContentTitle("Task Reminder")
                 .setContentText("One of your tasks is ready to go!")
                 .setTicker("New Event Alert!")
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
                 .setSmallIcon(R.drawable.ic_stat_access_alarms)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
-                        R.mipmap.ic_launcher))
                 .setSound(sound)
                 .setContentIntent(pendingIntent).build();
 
