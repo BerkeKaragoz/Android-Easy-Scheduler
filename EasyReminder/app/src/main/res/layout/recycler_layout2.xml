@@ -7,6 +7,7 @@
     android:layout_height="100dp"
     android:layout_marginBottom="8dp"
     android:background="@color/erColorBackground">
+
     <TextView
         android:id="@+id/recycDetails"
         android:layout_width="0dp"
@@ -28,6 +29,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif"
         android:text=""
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recycDelete"
@@ -44,6 +46,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif"
         android:paddingEnd="8dp"
         android:textAlignment="textEnd"
         android:textStyle="italic"
