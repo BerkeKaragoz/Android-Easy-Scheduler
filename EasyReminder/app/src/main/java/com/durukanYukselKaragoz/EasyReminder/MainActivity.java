@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -185,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onLongPress(MotionEvent e) {
             super.onLongPress(e);
+
         }
     }
+
 }
