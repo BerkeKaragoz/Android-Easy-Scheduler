@@ -18,6 +18,10 @@ public class Event {
         this.minute = minute;
     }
 
+    public String getTime(){
+        return String.format("%02d", this.getDay()) + "/" + String.format("%02d", (this.getMonth()+1)) + "/" + this.getYear() + "\n" + String.format("%02d", this.getHour()) + ":" + String.format("%02d", this.getMinute());
+    }
+
     public int getId() {
         return id;
     }

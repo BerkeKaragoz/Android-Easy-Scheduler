@@ -23,7 +23,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     DatabaseHelper db;
     boolean allTasks; //if true, use it for all tasks and keep the delete button, if not hide it
 
-    private final int DETAIL_MAX_CHARACTERS = 100;
+    private final int TITLE_MAX_CHARACTERS = 30;
 
     public MyRecyclerViewAdapter(Context context, ArrayList<Event> events) {
         this.context = context;
@@ -47,12 +47,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //BIND DATA
         final Event event = events.get(position);
-        holder.tvName.setText(event.getEventName());
+        holder.tvName.setText(ExtendedStringFormatter.ellipsize(event.getEventName(), TITLE_MAX_CHARACTERS));
 
-        String date = String.format("%02d", event.getDay()) + "/" + String.format("%02d", (event.getMonth()+1)) + "/" + event.getYear() + "\n" + String.format("%02d", event.getHour()) + ":" + String.format("%02d", event.getMinute());
-        holder.tvDate.setText(date);
-
-        holder.tvDetails.setText(ExtendedStringFormatter.ellipsize("\t" + event.getEventDetail(), DETAIL_MAX_CHARACTERS));
+        holder.tvDate.setText(event.getTime());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,8 +78,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             super(viewItem);
             tvName = viewItem.findViewById(R.id.recycName);
             tvDate = viewItem.findViewById(R.id.recycDate);
-            tvDetails = viewItem.findViewById(R.id.recycDetails);
-            btnDelete = viewItem.findViewById(R.id.recycDelete);
+            btnDelete = viewItem.findViewById(R.id.recycDelete2);
         }
     }
 }
