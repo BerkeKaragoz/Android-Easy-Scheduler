@@ -161,6 +161,7 @@ public class addTask extends AppCompatActivity {
                 PendingIntent broadcast = PendingIntent.getBroadcast(this, (int) id, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendarToSchedule.getTimeInMillis(), broadcast);
                 Toast.makeText(this, "Task successfully added!", Toast.LENGTH_LONG).show();
+                finish();
             } else {
                 Toast.makeText(this, "Date entered is invalid", Toast.LENGTH_LONG).show();
             }
