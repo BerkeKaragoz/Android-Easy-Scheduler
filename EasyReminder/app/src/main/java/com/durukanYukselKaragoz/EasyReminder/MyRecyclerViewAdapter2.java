@@ -23,7 +23,7 @@ public class MyRecyclerViewAdapter2 extends RecyclerView.Adapter<MyRecyclerViewA
     DatabaseHelper db;
     boolean allTasks; //if true, use it for all tasks and keep the delete button, if not hide it
     private final int DETAIL_MAX_CHARACTERS = 100;
-    private final int TITLE_MAX_CHARACTERS = 30;
+    private final int TITLE_MAX_CHARACTERS = 25;
 
     public MyRecyclerViewAdapter2(Context context, ArrayList<Event> events) {
         this.context = context;

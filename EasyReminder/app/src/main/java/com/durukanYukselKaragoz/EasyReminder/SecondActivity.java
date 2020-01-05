@@ -45,11 +45,10 @@ public class SecondActivity extends AppCompatActivity {
         LocalDateTime finalDate = findDate(times);
         if(finalDate != null) {
             foundEvent = findEventByTime(finalDate, events);
-            tvDetail.setText(foundEvent.getEventDetail());
+            tvDetail.setText("\t" + foundEvent.getEventDetail());
             tvName.setText(foundEvent.getEventName());
             tvTaskType.setText(foundEvent.getEventType());
-            String date = foundEvent.getYear() + "/" + foundEvent.getMonth() + "/" + foundEvent.getDay() + "    " + String.format("%02d", foundEvent.getHour()) + ":" + String.format("%02d", foundEvent.getMinute());
-            tvDate.setText(date);
+            tvDate.setText(foundEvent.getTime());
         }
         if(imageFragment == null){
             imageFragment = (ImageFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
