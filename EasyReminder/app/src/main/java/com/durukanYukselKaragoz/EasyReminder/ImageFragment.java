@@ -39,13 +39,13 @@ public class ImageFragment extends Fragment {
     }
 
     public void changeImage(String category){
+        if(category.equalsIgnoreCase("OTHER"))
+            imageView.setImageResource(R.drawable.other);
         if(category.equalsIgnoreCase("BIRTHDAY"))
             imageView.setImageResource(R.drawable.birthday);
         if(category.equalsIgnoreCase("BUSINESS"))
             imageView.setImageResource(R.drawable.business);
         if(category.equalsIgnoreCase("MEETING"))
             imageView.setImageResource(R.drawable.meeting);
-        if(category.equalsIgnoreCase("OTHER"))
-            imageView.setImageResource(R.drawable.other);
     }
 }
