@@ -8,19 +8,6 @@
     tools:context=".SecondActivity">
 
     <TextView
-        android:id="@+id/tvTaskType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="TaskType"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,7 +43,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:fadeScrollbars="true"
-        app:layout_constraintBottom_toTopOf="@+id/tvTaskType"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDate">
@@ -79,7 +66,7 @@
         android:id="@+id/fragment"
         android:name="com.durukanYukselKaragoz.EasyReminder.ImageFragment"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="125dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
@@ -87,5 +74,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_image" />
+
+    <Button
+        android:id="@+id/buttonClose"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Close"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="finishActivity"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

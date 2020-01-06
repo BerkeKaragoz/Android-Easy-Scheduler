@@ -3,6 +3,7 @@ package com.durukanYukselKaragoz.EasyReminder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ public class SecondActivity extends AppCompatActivity {
     ArrayList<Event> events;
     DatabaseHelper dbHelper;
     ArrayList<LocalDateTime> times;
-    TextView tvName, tvDetail, tvDate, tvTaskType;
+    TextView tvName, tvDetail, tvDate;
     Event foundEvent;
     ImageFragment imageFragment;
     @Override
@@ -31,7 +32,6 @@ public class SecondActivity extends AppCompatActivity {
         events = (ArrayList) EventDB.getAllEvent(dbHelper);
         times = new ArrayList<>();
         tvDate = findViewById(R.id.tvDate);
-        tvTaskType = findViewById(R.id.tvTaskType);
         tvName = findViewById(R.id.tvName);
         tvDetail = findViewById(R.id.tvDetail);
 
@@ -47,7 +47,6 @@ public class SecondActivity extends AppCompatActivity {
             foundEvent = findEventByTime(finalDate, events);
             tvDetail.setText("\t" + foundEvent.getEventDetail());
             tvName.setText(foundEvent.getEventName());
-            tvTaskType.setText(foundEvent.getEventType());
             tvDate.setText(foundEvent.getTime());
         }
         if(imageFragment == null){
@@ -74,5 +73,9 @@ public class SecondActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    public void finishActivity(View view) {
+        finish();
     }
 }
